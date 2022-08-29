@@ -1,12 +1,20 @@
 {
-  "name": "ms-db",
+  "name": "@lukasa1993/ms-db",
   "description": "db package for ms-starter",
+  "author": {
+    "name": "luka dodelia",
+    "email": "luka@picktek.com"
+  },
+  "publishConfig": {
+    "access": "public",
+    "tag": "ms-starter"
+  },
   "version": "1.0.0",
   "type": "module",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lukasa1993/ms-db.git"
+    "url": "https://github.com/lukasa1993/ms-db.git"
   },
   "license": "ISC",
   "bugs": {
