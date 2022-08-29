@@ -1,5 +1,8 @@
 import fs       from 'fs';
-import ley      from 'ley';
+import {
+  create,
+  up,
+}               from 'ms-db-migration';
 import postgres from 'postgres';
 
 export const DB_CONFIG = {
@@ -8,8 +11,7 @@ export const DB_CONFIG = {
   username: process.env.POSTGRES_USER,
   database: process.env.POSTGRES_DB,
   password: process.env.POSTGRES_PASSWORD || fs.readFileSync('/run/secrets/POSTGRES_PASSWORD_FILE').toString().trim(),
-  // schema:   process.env.POSTGRES_SCHEMA,
-  ssl: parseInt(process.env.POSTGRES_SSL) === 1 ? {
+  ssl:      parseInt(process.env.POSTGRES_SSL) === 1 ? {
     rejectUnauthorized: true,
     ca:                 fs.readFileSync('/run/secrets/POSTGRES_CA').toString(),
   } : null,
@@ -21,25 +23,27 @@ export function createMigrationsFolder() {
   }
 }
 
-export async function migrate() {
+export async function migrate(schema) {
   createMigrationsFolder();
 
-  return await ley.up({
+  return await up({
     dir:    './migrations',
     driver: 'postgres',
-    config: DB_CONFIG,
+    config: {
+      ...DB_CONFIG, schema,
+    },
   });
 }
 
-export async function createMigration(name) {
+export async function createMigration(name, schema) {
   createMigrationsFolder();
 
-  return await ley.new({
+  return await create({
     dir:       './migrations',
     driver:    'postgres',
     filename:  name,
     timestamp: true,
-    config:    DB_CONFIG,
+    config:    { ...DB_CONFIG, schema },
   });
 }
 
