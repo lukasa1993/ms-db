@@ -1,0 +1,25 @@
+{
+  "name": "ms-db",
+  "description": "db package for ms-starter",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lukasa1993/ms-db.git"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lukasa1993/ms-db/issues"
+  },
+  "homepage": "https://github.com/lukasa1993/ms-db#readme",
+  "bin": {
+    "new": "./new.js",
+    "npx-cli-package": "./new.js"
+  },
+  "dependencies": {
+    "ley": "^0.7.1",
+    "metalogger": "^2.2.1",
+    "postgres": "^3.2.4"
+  }
+}
